@@ -8,6 +8,10 @@ app.use(express.json());
 const COGNITIVE_API_ENDPOINT = process.env.COGNITIVE_API_ENDPOINT;
 const COGNITIVE_API_KEY = process.env.COGNITIVE_API_KEY;
 
+app.get("/", (req, res) => {
+    res.send("Hello World!");
+});
+
 app.post('/process', async (req, res) => {
     const data = req.body;
     try {
