@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Analyzer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #234fa8;
+      color: white;
+    }
+    header {
+      margin-top: 50px;
+    }
+    form {
+      margin: 20px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+    }
+    pre {
+      text-align: left;
+      background-color: #0e78be;
+      padding: 20px;
+      border-radius: 8px;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Image Analyzer</h1>
+    <form id="imageForm">
+      <label>
+        Upload Image:
+        <input type="file" id="imageInput" accept="image/*" required>
+      </label>
+      <button type="submit">Analyze</button>
+    </form>
+    <div id="responseContainer"></div>
+    <div id="errorContainer"></div>
+  </header>
+
+  <!-- Include Axios from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    document.getElementById('imageForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      document.getElementById('responseContainer').innerHTML = '';
+      document.getElementById('errorContainer').innerHTML = '';
+
+      const imageInput = document.getElementById('imageInput').files[0];
+      const formData = new FormData();
+      formData.append('image', imageInput);
+
+      try {
+        const response = await axios.post('http://localhost:5000/analyze', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+
+        document.getElementById('responseContainer').innerHTML = `<h2>Response</h2><pre>${JSON.stringify(response.data, null, 2)}</pre>`;
+      } catch (error) {
+        document.getElementById('errorContainer').innerHTML = `<h2>Error</h2><pre>${error.message}</pre>`;
+      }
+    });
+  </script>
+</body>
+</html>
