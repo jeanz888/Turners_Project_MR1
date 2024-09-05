@@ -58,9 +58,10 @@
       formData.append('image', imageInput);
 
       try {
-        const response = await axios.post('http://localhost:5000/analyze', formData, {
+        const response = await axios.post('https://mr1-test.cognitiveservices.azure.com/vision/v3.1/analyze?visualFeatures=Categories,Description,Color', formData, {
           headers: {
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data',
+            'Ocp-Apim-Subscription-Key': '4863f1bb43cd4823832abe9bd8bc2b42'
           }
         });
 

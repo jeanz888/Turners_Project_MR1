@@ -1,0 +1,12 @@
+This code is an HTML document that includes a form for uploading an image and a script to analyze the uploaded image 
+using the Azure Cognitive Services API.
+
+The HTML document includes a form with an input field for uploading an image and a button to submit the form. 
+It also includes two empty containers for displaying the response and any errors that occur during the analysis.
+
+The script included at the end of the document adds an event listener to the form's submit event. When the form is submitted, 
+the script prevents the default form submission behavior, clears the response and error containers, retrieves the uploaded image, 
+creates a FormData object with the image data, and then makes a POST request to the Azure Cognitive Services API using the Axios library.
+
+The POST request includes the image data and some headers, including the API subscription key. If the request is successful, 
+the response data is displayed in the response container. If an error occurs, the error message is displayed in the error container.
